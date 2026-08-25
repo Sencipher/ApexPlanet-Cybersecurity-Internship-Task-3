@@ -1,17 +1,47 @@
-# Web Application Security Assessment - DVWA
+# ApexPlanet Cybersecurity Internship – Task 3: Web Application Security
 
-## Overview
-This repository contains vulnerability analysis, proof-of-concept testing, and source-code mitigations for OWASP Top 10 vulnerabilities tested within a controlled DVWA (Damn Vulnerable Web Application) environment.
+**Intern:** Vivek Sen  
+**Internship ID:** APSPL2641756  
+**Track:** Cybersecurity & Ethical Hacking  
+**Target Environment:** DVWA (Damn Vulnerable Web Application) on Kali Linux  
+**Security Level:** Low  
 
-## Vulnerabilities Explored
-- **SQL Injection (SQLi)**: Extraction of database entries via unescaped query parameters.
-- **Cross-Site Scripting (XSS)**: Execution of arbitrary client-side scripts via Reflected and Stored vectors.
-- **Cross-Site Request Forgery (CSRF)**: Unauthorized state change of user credentials.
-- **File Inclusion (LFI/RFI)**: Directory traversal and remote resource execution analysis.
+---
 
-## Key Mitigations Implemented
-1. **Parameterized Queries (PDO)**:
-   ```php
-   $stmt =$pdo->prepare('SELECT first_name, last_name FROM users WHERE user_id = :id');
-   $stmt->execute(['id' =>$id]);
-   $user =$stmt->fetch();
+## 📌 Project Overview
+This repository contains the comprehensive vulnerability assessment, proof-of-concept exploitation, root cause analysis, and secure code remediation for key **OWASP Top 10** web application vulnerabilities conducted during Task 3 of the ApexPlanet Internship program.
+
+---
+
+## 📂 Vulnerability Modules & Documentation
+
+Click on any module below to view detailed attack scenarios, source code breakdowns, screenshots, and remediation guides:
+
+* [📁 **SQL Injection (SQLi)**](./SQL-Injection/README.md)
+  * Authentication bypass (`' OR '1'='1`)
+  * `UNION`-based database extraction (`%' UNION SELECT user, password FROM users #`)
+  * Password hash cracking using John the Ripper
+  * Remediation using PHP PDO Prepared Statements
+
+* [📁 **Cross-Site Scripting (XSS)**](./XSS/README.md)
+  * Reflected XSS session cookie theft (`document.cookie`)
+  * Persistent Stored XSS via Guestbook entries
+  * Context-aware output encoding (`htmlspecialchars()`) & CSP hardening
+
+* [📁 **Cross-Site Request Forgery (CSRF)**](./CSRF/README.md)
+  * Proof-of-concept exploit (`csrf_poc.html`) for unauthorized password reset
+  * Defense via Anti-CSRF Synchronizer Tokens & `SameSite=Strict` cookies
+
+* [📁 **Local File Inclusion (LFI)**](./LFI/README.md)
+  * Directory traversal (`../../../../etc/passwd`)
+  * Impact analysis (system account disclosure & RCE vectors)
+  * Defense via strict file whitelisting & `php.ini` directives
+
+---
+
+## 🛠️ Tools & Technologies Used
+* **Operating System:** Kali Linux (VMware Workstation)
+* **Web Environment:** Apache, PHP, MySQL / MariaDB (DVWA)
+* **Password Cracking:** John the Ripper
+* **Interception & Analysis:** Burp Suite Community Edition
+* **Language & Fixes:** PHP, HTML5, JavaScript
