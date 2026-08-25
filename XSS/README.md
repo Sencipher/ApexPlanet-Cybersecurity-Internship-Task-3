@@ -114,7 +114,7 @@ if (isset($_POST['btnSign'])) {
 ## 5. Comprehensive Remediation & Mitigation
 **5.1 Primary Defense:** Context-Aware Output Encoding (PHP)
 Wrap all user-controlled data in htmlspecialchars() with the ENT_QUOTES and ENT_HTML5 flags before outputting them to the DOM:
-```
+```php
 function sanitize_output($data) {
     return htmlspecialchars($data, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 }
