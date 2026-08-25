@@ -1,1 +1,36 @@
+# Cross-Site Scripting (XSS) Vulnerability Assessment & Remediation
+
+**Internship Program:** Cybersecurity & Ethical Hacking (ApexPlanet)  
+**Task Module:** Task 3 – Web Application Security  
+**Target Application:** Damn Vulnerable Web Application (DVWA)  
+**Security Level:** Low  
+**Vulnerability Classification:** CWE-79 (Improper Neutralization of Input During Web Page Generation) / OWASP Top 10 A03:2021 – Injection  
+
+---
+
+## 1. Vulnerability Overview
+Cross-Site Scripting (XSS) vulnerabilities occur when an application receives untrusted user input and embeds it into dynamic web output without proper contextual validation or encoding. This allows an attacker to execute arbitrary client-side JavaScript code in the browser session of a legitimate user.
+
+* **Primary Security Risks:**
+  * Extraction of session identifiers and sensitive authentication cookies (`PHPSESSID`).
+  * Unauthorized execution of state-changing actions under the victim's authenticated context.
+  * DOM manipulation, content defacement, and credential phishing overlays.
+  * Keystroke logging and redirection to external malicious infrastructure.
+
+---
+
+## 2. Reflected XSS (Non-Persistent)
+
+### 2.1 Target Endpoint & Parameter
+* **Target URL:** `http://127.0.0.1/DVWA/vulnerabilities/xss_r/`
+* **Vulnerable Parameter:** `name` (HTTP GET request)
+
+### 2.2 Insecure Source Code (Root Cause)
+The backend PHP code reads input directly from `$_GET['name']` and echoes it into the HTML body without filtering or output encoding:
+
+```php
+// Insecure Reflected XSS Code (DVWA Low Level)
+if (array_key_exists("name", $_GET) && $_GET['name'] != NULL) {
+    echo '<pre>Hello ' . $_GET['name'] . '</pre>';
+}```
 
