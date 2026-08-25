@@ -32,5 +32,40 @@ The backend PHP code reads input directly from `$_GET['name']` and echoes it int
 // Insecure Reflected XSS Code (DVWA Low Level)
 if (array_key_exists("name", $_GET) && $_GET['name'] != NULL) {
     echo '<pre>Hello ' . $_GET['name'] . '</pre>';
-}```
+```
+
+### 2.3 Attack Methodology & Payload
+* Exploitation Payload:
+  
+`<script>alert(document.cookie)</script>`
+
+* Execution Flow:
+
+1. The attacker crafts a targeted URL embedding the malicious JavaScript inside the name parameter:
+`http://127.0.0.1/DVWA/vulnerabilities/xss_r/?name=%3Cscript%3Ealert(document.cookie)%3C/script%3E`
+
+2. The victim clicks the malicious link while possessing an active DVWA session.
+
+3. The server immediately reflects the payload back to the browser without sanitizing < or >.
+
+4. The browser executes the JavaScript and displays the victim's active PHPSESSID session cookie.
+
+### 2.4 Exploitation Proof of Concept (PoC)
+
+<img width="1366" height="745" alt="Kali linux - VMware Workstation 8_14_2026 8_35_51 PM" src="https://github.com/user-attachments/assets/714c9232-e118-4f29-b8b5-1f1ee6c7ca78" />
+
+
+**Figure 2.1:** Reflected XSS execution demonstrating unauthorized access to session cookies via the document.cookie object.
+
+
+
+
+
+
+
+
+
+
+
+
 
