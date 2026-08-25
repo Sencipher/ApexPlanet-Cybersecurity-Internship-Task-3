@@ -117,7 +117,13 @@ foreach ($results as $row) {
 Below is the screenshot demonstrating the successful execution of the UNION-based SQL injection payload in DVWA, extracting database records and MD5 hashes:
 
 <!-- Paste / Drag-and-drop your image directly below this line -->
+#### 1. Payload Injection
 <img width="1366" height="745" alt="Kali linux - VMware Workstation 8_14_2026 8_32_54 PM" src="https://github.com/user-attachments/assets/2ba1bee3-e7d3-440d-ae31-380133b7e6fb" />
+
+
+#### 2. Password Hash Cracking
+<img width="1366" height="745" alt="Kali linux - VMware Workstation 8_14_2026 8_33_04 PM" src="https://github.com/user-attachments/assets/e5941d12-2fe7-489a-b710-152655fd1346" />
+
 
 
 > **Figure 1.1:** Verification of extracted user table rows and password hashes via the `' UNION SELECT user, password FROM users #` payload.
