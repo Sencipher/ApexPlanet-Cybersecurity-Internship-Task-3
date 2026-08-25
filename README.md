@@ -32,7 +32,7 @@ Click on any module below to view detailed attack scenarios, source code breakdo
   * Proof-of-concept exploit (`csrf_poc.html`) for unauthorized password reset
   * Defense via Anti-CSRF Synchronizer Tokens & `SameSite=Strict` cookies
 
-* [📁 **Local File Inclusion (LFI)**](./Local%20File%20Inclusion(LFI)/README.md)
+* [📁 **Local File Inclusion (LFI)**](./Local%20File%20Inclusion%20%28LFI%29/README.md)
   * Directory traversal (`../../../../etc/passwd`)
   * Impact analysis (system account disclosure & RCE vectors)
   * Defense via strict file whitelisting & `php.ini` directives
