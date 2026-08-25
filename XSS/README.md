@@ -35,11 +35,11 @@ if (array_key_exists("name", $_GET) && $_GET['name'] != NULL) {
 ```
 
 ### 2.3 Attack Methodology & Payload
-* Exploitation Payload:
+* **Exploitation Payload:**
   
 `<script>alert(document.cookie)</script>`
 
-* Execution Flow:
+* **Execution Flow:**
 
 1. The attacker crafts a targeted URL embedding the malicious JavaScript inside the name parameter:
 `http://127.0.0.1/DVWA/vulnerabilities/xss_r/?name=%3Cscript%3Ealert(document.cookie)%3C/script%3E`
@@ -58,13 +58,27 @@ if (array_key_exists("name", $_GET) && $_GET['name'] != NULL) {
 **Figure 2.1:** Reflected XSS execution demonstrating unauthorized access to session cookies via the document.cookie object.
 
 
+### 3. Stored XSS (Persistent)
+**3.1** Target Endpoint & Parameter
+
+* **Target URL:** 
+ `http://127.0.0.1/DVWA/vulnerabilities/xss_s/`
+ 
+* **Vulnerable Parameters:** `txtName` (Name field), `mtxMessage` (Message field) via HTTP POST
 
 
+### 3.2 Insecure Source Code (Root Cause)
+The application accepts user input from the guestbook form, stores it raw into the database, and renders stored records to all subsequent visitors without escaping:
 
+```
+if (isset($_POST['btnSign'])) {
+    $message = trim($_POST['mtxMessage']);
+    $name    = trim($_POST['txtName']);
 
-
-
-
+    $query  = "INSERT INTO guestbook (comment, name) VALUES ('$message', '$name');";
+    $result = mysqli_query($GLOBALS["___mysqli_ston"], $query);
+}
+```
 
 
 
