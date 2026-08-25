@@ -70,7 +70,7 @@ if (array_key_exists("name", $_GET) && $_GET['name'] != NULL) {
 ### 3.2 Insecure Source Code (Root Cause)
 The application accepts user input from the guestbook form, stores it raw into the database, and renders stored records to all subsequent visitors without escaping:
 
-```
+```php
 if (isset($_POST['btnSign'])) {
     $message = trim($_POST['mtxMessage']);
     $name    = trim($_POST['txtName']);
